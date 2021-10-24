@@ -14,36 +14,29 @@ int main(){
   std::cout << "Reading statement" << std::endl;
   std::fstream statement("..\\src\\File\\statement.txt", std::ios::app | std::ios::binary | std::ios::in);
   std::string action;
-  // char* name;
-  // char* data;
-  // int money;  
-  data_statement* ds;
+  data_statement ds;
  
   std::cin >> action;
   if(statement.is_open()){
     if(action == "list"){
       std::cout << "Print statement" << std::endl;
       while(!statement.eof()){
-        statement.read((char *)ds->name.c_str(), sizeof(ds->name));
-        statement.read((char *)ds->data.c_str(), sizeof(ds->data));
-        statement.read((char *)&ds->money, sizeof(ds->money));
-
-      // std::cout << "sizeof(ds->name) - " << ds->name.c_str() << std::endl;
-
-        // statement >> ds->name >> ds->data >> ds->money;
+        statement >> ds.name; 
+        statement >> ds.data;
+        statement >> ds.money;
         
-        std::cout << "Name: " << ds->name.c_str() << std::endl;
-        // std::cout << "Data: " << ds->data.c_str() << std::endl;
-        // std::cout << "Money: " << ds->money << std::endl;
+        std::cout << "Name: " << ds.name.c_str() 
+                  << " Data: " << ds.data.c_str() 
+                  << " Money: " << ds.money << std::endl;
       }
 
     }else if(action == "add"){
       std::cout << "Write in statement" << std::endl;
       std::cout << "Enter elements: 1 - name, 2 - data, 3 - money" << std::endl;
-      std::cin >> ds->name;
-      std::cin >> ds->data;
-      std::cin >> ds->money;
-      statement << ds->name << " " << ds->data << " " << ds->money << "\n";
+      std::cin >> ds.name;
+      std::cin >> ds.data;
+      std::cin >> ds.money;
+      statement << ds.name << " " << ds.data << " " << ds.money << "\n";
     }else{
       std::cout << "ERROR action" << std::endl;
     }
